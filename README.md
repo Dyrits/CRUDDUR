@@ -33,3 +33,7 @@ The `/journal` directory contains
 - [ ] [Week 11](journal/week11.md)
 - [ ] [Week 12](journal/week12.md)
 - [ ] [Week 13](journal/week13.md)
+
+## Local frontend maintenance
+
+The React frontend now uses Vite with Node.js 26 LTS. See [frontend setup and verification](frontend-react-js/README.md), including the unchanged demo-authentication limits. No AWS deployment or backend migration was performed.

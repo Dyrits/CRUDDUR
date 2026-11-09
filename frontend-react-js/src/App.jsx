@@ -15,13 +15,23 @@ import {
   RouterProvider
 } from "react-router-dom";
 
-const router = createBrowserRouter([
+// Router 7 matches parameters as full segments. Keep the public @handle URLs
+// and reject non-profile segments rather than making every unknown URL a profile.
+const requireHandle = ({ params }) => {
+  if (!params.handle?.startsWith('@') || params.handle.length < 2) {
+    throw new Response('Not Found', { status: 404 });
+  }
+  return null;
+};
+
+export const router = createBrowserRouter([
   {
     path: "/",
     element: <HomeFeedPage />
   },
   {
-    path: "/@:handle",
+    path: "/:handle",
+    loader: requireHandle,
     element: <UserFeedPage />
   },
   {
@@ -29,7 +39,8 @@ const router = createBrowserRouter([
     element: <MessageGroupsPage />
   },
   {
-    path: "/messages/@:handle",
+    path: "/messages/:handle",
+    loader: requireHandle,
     element: <MessageGroupPage />
   },
   {
